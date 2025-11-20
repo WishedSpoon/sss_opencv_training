@@ -30,11 +30,25 @@ def check_opencv():
 #   the -> cv2.typing.MatLike means the function will return something that is MatLike. Once again, this might be an image, or like an array, etc.
 def training_task():
     pass
-    # TODO: 1) Capture a video stream from your webcam
+    # TODO: 1) Capture a video stream from your webcam - done done done
     # Hint: just search "capture video feed opencv" in google
     # Hint: this should be a few lines (1 to set up the capture, and a few to check if it opened)
 
+    cap = cv.VideoCapture(0)
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+        
     while True:
+
+        # Capture frame-by-frame
+        ret, frame = cap.read()
+ 
+        # if frame is read correctly ret is True
+        if not ret:
+            print("Can't receive frame (stream end?). Exiting ...")
+            break
+        
         # TODO: 2) Repeatedly read a frame from your videocapture device
 
         # This will display the video feed
@@ -43,10 +57,11 @@ def training_task():
         # if cv.waitKey(1) == ord('q'): break
         # else: continue
 
-
+        
         # TODO: 3) Now you you'll do the aruco tag stuff;
         annotated_frame = frame.copy()
 
+        detector = 	cv.aruco.ArucoDetector([cv.aruco.DICT_6X6_100[, detectorParams[, refineParams]]]	) -> <aruco_ArucoDetector object>
         # TODO: 3.1) Create your detector
         # Hint: Use cv.aruco.DICT_6X6_100 as your dictionary
         # Look into the ArucoDetector(...), DetectorParameters(...), getPredefinedDictionary(...) methods from cv.aruco
@@ -93,7 +108,7 @@ def training_task():
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    check_opencv()
-    # training_task()
+    # check_opencv()
+    training_task()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
