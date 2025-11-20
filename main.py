@@ -53,23 +53,34 @@ def training_task():
 
         # This will display the video feed
         # Comment out the if-else once you move onto the next part
-        cv.imshow("Webcam Feed", frame)
+        # cv.imshow("Webcam Feed", frame)
         # if cv.waitKey(1) == ord('q'): break
         # else: continue
 
         
         # TODO: 3) Now you you'll do the aruco tag stuff;
         annotated_frame = frame.copy()
-
-        detector = 	cv.aruco.ArucoDetector([cv.aruco.DICT_6X6_100[, detectorParams[, refineParams]]]	) -> <aruco_ArucoDetector object>
+        
         # TODO: 3.1) Create your detector
         # Hint: Use cv.aruco.DICT_6X6_100 as your dictionary
         # Look into the ArucoDetector(...), DetectorParameters(...), getPredefinedDictionary(...) methods from cv.aruco
 
+        aruco_dict = cv.aruco.getPredefinedDictionary(cv.aruco.DICT_6X6_100)
+        parameters = cv.aruco.DetectorParameters()
+        
+        detector = 	cv.aruco.ArucoDetector(aruco_dict, parameters)
+        
         # TODO: 3.2) Use your detector to find the markers
+        
+        corners, ids, rejected = detector.detectMarkers(annotated_frame)
 
         # TODO: 3.3) Draw rectangles around your markers
-
+        for corner in corners:
+            top_left = (int(corner[0][0][0]), int(corner[0][0][1]))
+            bottom_right = (int(corner[0][2][0]), int(corner[0][2][1]))
+            
+            cv.rectangle(annotated_frame, top_left, bottom_right, (0, 255, 0), 2)
+        
         # TODO: 4) Draw a circle at the center point (or average) of all the tags
         if ids is not None:
 
