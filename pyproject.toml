@@ -1,6 +1,11 @@
 [project]
-name = "sss-opencv-training"
+name = "opencvstuff"
 version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+    "matplotlib>=3.10.7",
+    "opencv-contrib-python>=4.12.0.88",
+    "opencv-python>=4.12.0.88",
+    "requests>=2.32.5",
+]
