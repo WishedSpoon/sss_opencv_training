@@ -93,24 +93,34 @@ def training_task():
             #       For this training using int(x) to turn x into an integer is fine
             centers = []
             
+            # Loop over each set of corners (each list should correspond to 1 tag):
             for corner in corners:
+                #reset the corner coordinate list
                 cornerList = []
                 for i in range(4):
+                    #gets the x,y coordinate of each corner
                     cornerList.append( (int(corner[0][i][0]), int(corner[0][i][1])) )
-                print("")
-                print(cornerList)
+                
+                #unpacks tuple into x and y to find average
                 for x, y in cornerList:
                     xTotal += x
                     yTotal += y
-                centers.append( ((xTotal / 4), (yTotal / 4)) )
+                    
+                #average of corners = the center
+                centerX = xTotal / 4
+                centerY = yTotal / 4
+                
+                #draws circle at center
+                cv.circle(annotated_frame, (centerX, centerY), 50, (0,0,255), 2)
+                #adds values to the centers list as tuple
+                centers.append( (centerX, centerY) )
             
-            # Loop over each set of corners (each list should correspond to 1 tag):
-            for corner_outer_array in corners:
+            # for corner_outer_array in corners:
                 # Find the middle of that tag
 
                 # draw a circle at the center of the aruco tag
                 # use cv.circle(...) to draw a smallish circle
-                continue
+                # continue
 
 
             # TODO: 4.2) Find the center point of the centers of all the tags, if you found 4 tags
