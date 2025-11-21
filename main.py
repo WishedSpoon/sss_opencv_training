@@ -127,7 +127,14 @@ def training_task():
             # Hint: This will look almost identical to the previous step, but without the weirdly nested arrays
             if len(centers) == 4:
                 # Draw a circle at the point at the average position of all 4 tags
-                continue
+                for centerXCoords, centerYCoords in centers:
+                    xTotal += centerXCoords
+                    yTotal += centerYCoords
+                    
+                globalCenterX = xTotal / 4
+                globalCenterY = yTotal / 4
+                
+                cv.circle(annotated_frame, (globalCenterX, globalCenterY), 50, (0,0,255), 2)
 
         # Draw your frame, with all of your annotations
         cv.imshow('Annotated Frame', annotated_frame)
