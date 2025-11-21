@@ -97,6 +97,9 @@ def training_task():
             for corner in corners:
                 #reset the corner coordinate list
                 cornerList = []
+                xTotal = 0
+                yTotal = 0
+                
                 for i in range(4):
                     #gets the x,y coordinate of each corner
                     cornerList.append( (int(corner[0][i][0]), int(corner[0][i][1])) )
@@ -107,13 +110,14 @@ def training_task():
                     yTotal += y
                     
                 #average of corners = the center
-                centerX = xTotal / 4
-                centerY = yTotal / 4
+                centerX = int(xTotal / 4)
+                centerY = int(yTotal / 4)
+                center = (centerX, centerY)
                 
                 #draws circle at center
-                cv.circle(annotated_frame, (centerX, centerY), 50, (0,0,255), 2)
+                cv.circle(annotated_frame, center, 2, (0,0,255), 2)
                 #adds values to the centers list as tuple
-                centers.append( (centerX, centerY) )
+                centers.append(center)
             
             # for corner_outer_array in corners:
                 # Find the middle of that tag
@@ -126,15 +130,18 @@ def training_task():
             # TODO: 4.2) Find the center point of the centers of all the tags, if you found 4 tags
             # Hint: This will look almost identical to the previous step, but without the weirdly nested arrays
             if len(centers) == 4:
+                xTotal = 0
+                yTotal = 0
                 # Draw a circle at the point at the average position of all 4 tags
                 for centerXCoords, centerYCoords in centers:
                     xTotal += centerXCoords
                     yTotal += centerYCoords
                     
-                globalCenterX = xTotal / 4
-                globalCenterY = yTotal / 4
+                globalCenterX = int(xTotal / 4)
+                globalCenterY = int(yTotal / 4)
+                globalCenter = (globalCenterX, globalCenterY)
                 
-                cv.circle(annotated_frame, (globalCenterX, globalCenterY), 50, (0,0,255), 2)
+                cv.circle(annotated_frame, globalCenter, 2, (0,0,255), 2)
 
         # Draw your frame, with all of your annotations
         cv.imshow('Annotated Frame', annotated_frame)
