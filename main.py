@@ -92,6 +92,18 @@ def training_task():
             # Hint: Be careful with types: pixel coordinates should be integers.
             #       For this training using int(x) to turn x into an integer is fine
             centers = []
+            
+            for corner in corners:
+                cornerList = []
+                for i in range(4):
+                    cornerList.append( (int(corner[0][i][0]), int(corner[0][i][1])) )
+                print("")
+                print(cornerList)
+                for x, y in cornerList:
+                    xTotal += x
+                    yTotal += y
+                centers.append( ((xTotal / 4), (yTotal / 4)) )
+            
             # Loop over each set of corners (each list should correspond to 1 tag):
             for corner_outer_array in corners:
                 # Find the middle of that tag
